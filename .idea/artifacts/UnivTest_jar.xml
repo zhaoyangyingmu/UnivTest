@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="UnivTest:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/UnivTest_jar</output-path>
+    <root id="archive" name="UnivTest.jar">
+      <element id="module-output" name="UnivTest" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-5.1.10-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/sqlite-jdbc-3.21.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/csvjdbc.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

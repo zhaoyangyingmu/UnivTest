@@ -24,12 +24,17 @@ public class Mysql {
             pstmt.execute();
             conn.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return;
         }
     }
 
     public void insertCsvData(final String csvDirectory,final String csvName) {
-        Connection CsvConn = CsvUtil.getConn(csvDirectory);
+        String charset = "UTF-8";
+        if (csvName.equals("room")) {
+            charset = "GBK";
+        }
+        Connection CsvConn = CsvUtil.getConn(csvDirectory, charset);
         Statement stmt;
         try {
             // 读取CSV的数据
@@ -65,12 +70,14 @@ public class Mysql {
                     conn.commit();
                 }
             }
-        pstmt.executeBatch();
-        conn.commit();
-        CsvUtil.close(CsvConn, stmt, rs );
+            pstmt.executeBatch();
+            conn.commit();
+            CsvUtil.close(CsvConn, stmt, rs );
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Something wrong, please try again. ");
+            return;
         }
     }
 
@@ -133,7 +140,8 @@ public class Mysql {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return;
         }
     }
 
@@ -144,7 +152,8 @@ public class Mysql {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return;
         }
     }
 
@@ -172,9 +181,18 @@ public class Mysql {
         rs.close();
         st.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return;
         }
 
+    }
+
+    public void close() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getInsertSql(ResultSetMetaData rsmd, String tableName) throws SQLException {

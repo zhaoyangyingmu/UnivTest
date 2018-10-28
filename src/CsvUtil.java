@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.Properties;
 
 public class CsvUtil {
-    public static Connection getConn(String csvDirectory){
+    public static Connection getConn(String csvDirectory, String charset){
         // 加载CSV-JDBC驱动
         try {
             Class.forName("org.relique.jdbc.csv.CsvDriver");
@@ -24,7 +24,7 @@ public class CsvUtil {
         props.put("fileExtension", ".csv");
 
         // 字符集
-        props.put("charset", "UTF-8");
+        props.put("charset", charset);
 
         // 创建一个connection. The first command line parameter is assumed to
         // be the directory in which the .csv files are held
